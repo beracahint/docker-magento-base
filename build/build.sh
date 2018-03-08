@@ -15,10 +15,28 @@ if [ -z $MAGE_FILESYSTEM_S3_URL ]; then
 fi
 
 
+if [ -z $DOCKER_HUB_USER ]; then
+	echo -e  "[ERROR] DOCKER_HUB_USER env variable is mandatory"
+	exit 1
+fi
+
+if [ -z $DOCKER_HUB_PWD ]; then
+	echo -e  "[ERROR] DOCKER_HUB_PWD env variable is mandatory"
+	exit 1
+fi
+
+# Delete temporal folder
 rm -rf mage_filesystem
 mkdir mage_filesystem
 
+# Copy filesystem tar file to a local directory
 aws s3 cp $MAGE_FILESYSTEM_S3_URL mage_filesystem/filesystem.tar.gz
 
+# Perform the build
+IMAGE_TAG=`echo $CODEBUILD_BUILD_ID | cut -d':' -f2`
+docker build -t emedic/magento-base:$IMAGE_TAG .
 
-docker build -t emedic/magento-base:1.0.0 .
+
+echo "Info: upload image to Docker Hub.."
+docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PWD || { echo "Error en docker login"; exit 1; }
+docker push emedic/magento-base:$IMAGE_TAG || { echo "Error en docker push"; exit 1; }

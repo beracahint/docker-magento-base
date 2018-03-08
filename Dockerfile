@@ -101,5 +101,3 @@ WORKDIR /var/www/html
 #supervisord -n -c /etc/supervisor/supervisord.conf
 
 CMD ["/usr/bin/supervisord","-n","-c","/etc/supervisor/supervisord.conf"]
-
-# 1/26 - me quede en ver porque no jala el supervisor con el phpfpm, checar un ejemplo existente que tenga, y luego bajar el filesystem a este contenedor y ver si jale magento 2.2.2 (que actualizo Luis)
