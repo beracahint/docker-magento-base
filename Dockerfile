@@ -20,6 +20,20 @@ RUN apt-get update && apt-get -y upgrade
 RUN apt-get install -y curl supervisor
 COPY os_files/etc/supervisor/supervisord.conf /etc/supervisor/
 
+# aws-cli
+RUN curl -O https://bootstrap.pypa.io/get-pip.py \
+  && python get-pip.py --user
+  && export PATH=~/.local/bin:$PATH
+  && source ~/.profile
+  && pip install awscli --upgrade --user
+
+# Add utility to get filesystem
+RUN mkdir /opt/emedic
+COPY os_files/opt/emedic/generate_filesystem.sh /opt/emedic/
+RUN chmod +x /opt/emedic/generate_filesystem.sh
+
+
+
 # Set timezone
 #----------
 RUN apt-get install -y tzdata \
