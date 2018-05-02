@@ -22,10 +22,11 @@ COPY os_files/etc/supervisor/supervisord.conf /etc/supervisor/
 
 # aws-cli
 RUN curl -O https://bootstrap.pypa.io/get-pip.py \
-  && python get-pip.py --user
-  && export PATH=~/.local/bin:$PATH
-  && source ~/.profile
+  && python get-pip.py --user \
+  && export PATH=/root/.local/bin:$PATH \
   && pip install awscli --upgrade --user
+
+
 
 # Add utility to get filesystem
 RUN mkdir /opt/emedic
