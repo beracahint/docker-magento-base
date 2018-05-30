@@ -1,4 +1,4 @@
-#!/bin/Bash
+#!/bin/sh
 
 FILE_NAME=magento-`date +"%Y-%m-%d_%H-%M"`.tar
 cd /var/www/html

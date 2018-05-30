@@ -24,6 +24,7 @@ COPY os_files/etc/supervisor/supervisord.conf /etc/supervisor/
 RUN curl -O https://bootstrap.pypa.io/get-pip.py \
   && python get-pip.py --user \
   && export PATH=/root/.local/bin:$PATH \
+  && ln -s /root/.local/bin/aws /usr/local/bin/aws \
   && pip install awscli --upgrade --user
 
 
@@ -57,7 +58,12 @@ RUN echo "deb http://nginx.org/packages/ubuntu/ xenial nginx" >> /etc/apt/source
 COPY os_files/etc/nginx/conf.d /etc/nginx/conf.d/
 COPY os_files/etc/nginx/nginx.conf /etc/nginx/
 
-
+# Install Certbot
+#-----------------
+RUN apt-get install -y software-properties-common \
+  && add-apt-repository ppa:certbot/certbot -y \
+  && apt-get update \
+  && apt-get install -y python-certbot-nginx
 
 #
 # Install PHP 7.0 and PHP-FPM
