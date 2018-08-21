@@ -1,4 +1,5 @@
 #!/bin/sh
+# Generar filesystem cuando haya un cambio fuera de el codigo que tenemos en el repo docker-emedic-web
 
 FILE_NAME=magento-`date +"%Y-%m-%d_%H-%M"`.tar
 cd /var/www/html
