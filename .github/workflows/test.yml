@@ -1,8 +1,11 @@
 name: hello-world
-on: push
+on: workflow_dispatch
 jobs:
   my-job:
     runs-on: ubuntu-latest
+    env: {{ secrets.EDGAR_DOCKER_HUB_USER}}
     steps:
       - name: my-step
         run: echo "Hello World!"
+      - name: print-env
+        run: echo $EDGAR_DOCKER_HUB_USER
