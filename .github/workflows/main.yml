@@ -10,3 +10,7 @@ jobs:
         run: echo "Hello World!"
       - name: print-env
         run: echo $EDGAR_DOCKER_HUB_USER
+      - name: print-env2
+        run: echo $DOCKER_HUB_USER
+      - name: print-env-all
+        run: env
