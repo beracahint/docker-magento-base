@@ -19,5 +19,9 @@ jobs:
         run: |
           aws s3 cp $MAGE_FILESYSTEM_S3_URL filesystem.tar.gz
           ls -al
-      
-      
+          
+      - name: Build Docker Image 
+        run: |
+          mkdir mage_filesystem
+          mv filesystem.tar.gz mage_filesystem
+          docker build -t emedic/magento-base:$(date +%s)
