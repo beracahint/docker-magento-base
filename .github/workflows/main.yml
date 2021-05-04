@@ -6,6 +6,7 @@ jobs:
     env: 
       MAGE_FILESYSTEM_S3_URL: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
     steps:
+      - uses: actions/checkout@v2
       - name: Env vars
         run: env
       - name: Configure AWS Credentials
@@ -24,4 +25,4 @@ jobs:
         run: |
           mkdir mage_filesystem
           mv filesystem.tar.gz mage_filesystem
-          docker build -t emedic/magento-base:$(date +%s)
+          docker build -t beracahmx/magento-base:$(date +%s) .
