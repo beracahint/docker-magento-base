@@ -6,8 +6,16 @@ jobs:
     env: 
       MAGE_FILESYSTEM_S3_URL: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
     steps:
-      - name: Show env variables
-        run: env
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with: 
+          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          
       - name: Download AWS s3 file 
-        run: echo $MAGE_FILESYSTEM_S3_URL
+        run: |
+          aws s3 cp $MAGE_FILESYSTEM_S3_URL filesystem.tar.gz
+          ls -al
+      
       
