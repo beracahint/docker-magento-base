@@ -6,6 +6,8 @@ jobs:
     env: 
       MAGE_FILESYSTEM_S3_URL: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
     steps:
+      - name: Env vars
+        run: env
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with: 
