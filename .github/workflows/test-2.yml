@@ -3,7 +3,8 @@ on: workflow_dispatch
 jobs:
   my-job:
     runs-on: ubuntu-latest
-    env: {{ secrets.EDGAR_DOCKER_HUB_USER}}
+    env: 
+      DOCKER_HUB_USER: ${{ secrets.EDGAR_DOCKER_HUB_USER}}
     steps:
       - name: my-step
         run: echo "Hello World!"
