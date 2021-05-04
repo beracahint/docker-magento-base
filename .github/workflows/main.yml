@@ -4,7 +4,7 @@ jobs:
   my-job:
     runs-on: ubuntu-latest
     env: 
-      mage_filesystem_s3_url: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
+      MAGE_FILESYSTEM_S3_URL: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
     steps:
       - name: Show env variables
         run: env
