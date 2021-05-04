@@ -1,16 +1,11 @@
-name: hello-world-2
+name: Build Docker Image
 on: workflow_dispatch
 jobs:
   my-job:
     runs-on: ubuntu-latest
     env: 
-      DOCKER_HUB_USER: ${{ secrets.EDGAR_DOCKER_HUB_USER}}
+      mage_filesystem_s3_url: "s3://beracah-cicd/magento-2019-03-14_16-51.tar.gz"
     steps:
-      - name: my-step
-        run: echo "Hello World!"
-      - name: print-env
-        run: echo $EDGAR_DOCKER_HUB_USER
-      - name: print-env2
-        run: echo $DOCKER_HUB_USER
-      - name: print-env-all
-        run: env
+      - name: Download AWS s3 file 
+        run: echo $MAGE_FILESYSTEM_S3_URL
+      
